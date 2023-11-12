@@ -3,12 +3,8 @@ public class ContaCorrente extends ContaBancaria {
     private String tipo;
     public ContaCorrente(String cliente) {
         super(cliente);
-        this.numeroDeConta = gerarNumeroConta();
+        this.numeroDeConta = gerarNumero();
         this.tipo = getTipo();
-    }
-
-    private String gerarNumeroConta() {
-        return String.format("%s/500", gerarNumero());
     }
 
     public void verConta() {

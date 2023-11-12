@@ -1,12 +1,13 @@
 public class ContaBancaria {
     private String agencia;
     private String cliente;
-
     //mudar o tipo para Cliente quando a classe tiver pronta
+    private double saldo;
 
     public ContaBancaria(String cliente) {
         this.cliente = cliente;
         this.agencia = "0404-1";
+        this.saldo = 0;
     }
 
     public String gerarNumero() {
@@ -17,10 +18,11 @@ public class ContaBancaria {
     }
 
     public void verContaBancaria(String tipo, String numeroDaConta){
-        System.out.printf("Olá, %s, aqui estão as informações da sua nova conta:\n", this.cliente);
+        System.out.printf("Olá, %s, aqui estão as informações da sua conta:\n", this.cliente);
+        System.out.printf("Tipo: %s\n", tipo);
         System.out.printf("Número: %s\n", numeroDaConta);
         System.out.printf("Agência: %s\n", this.agencia);
-        System.out.printf("Tipo: %s\n", tipo);
+        System.out.printf("Saldo: R$%.2f\n", this.saldo);
     }
     public void sacar(){}
     public void depositar(){}
@@ -34,6 +36,10 @@ public class ContaBancaria {
 
     public String getCliente() {
         return cliente;
+    }
+
+    public double getSaldo() {
+        return saldo;
     }
 
     //mudar o tipo do cliente quando tiver a classe Cliente
