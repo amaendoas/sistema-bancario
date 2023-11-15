@@ -1,10 +1,11 @@
 public class ContaBancaria {
     private String agencia;
-    private Cliente cliente;
+    private PessoaFisica pessoaFisica;
+    private PessoaJuridica pessoaJuridica;
+
     private double saldo;
 
     public ContaBancaria(Cliente cliente) {
-        this.cliente = cliente;
         this.agencia = "0404-1";
         this.saldo = 0;
     }
@@ -17,12 +18,27 @@ public class ContaBancaria {
     }
 
     public void verContaBancaria(String tipo, String numeroDaConta){
-        System.out.printf("Olá, %s, aqui estão as informações da sua conta:\n", this.cliente);
-        System.out.printf("Tipo: %s\n", tipo);
-        System.out.printf("Número: %s\n", numeroDaConta);
-        System.out.printf("Agência: %s\n", this.agencia);
-        System.out.printf("Saldo: R$%.2f\n", this.saldo);
+        if(pessoaJuridica != null) {
+            System.out.printf("Olá, %s, aqui estão as informações da sua conta:\n", pessoaJuridica.getRazaoSocial());
+        }
+
+        if(pessoaFisica != null) {
+            System.out.printf("Olá, %s, aqui estão as informações da sua conta:\n", pessoaFisica.getNome());
+        }
+        System.out.printf("Tipo - %s\n", tipo);
+        System.out.printf("Número - %s\n", numeroDaConta);
+        System.out.printf("Agência - %s\n", this.agencia);
+        System.out.printf("Saldo - R$%.2f\n", this.saldo);
     }
+
+    public void abrirContaPF(String nome, String cpf, String email, String telefone) {
+        pessoaFisica = new PessoaFisica(1,email, telefone, nome, cpf);
+    }
+
+    public void abrirContaPJ(String razaoSocial, String cnpj, String email, String telefone) {
+        pessoaJuridica = new PessoaJuridica(1,email, telefone, razaoSocial, cnpj);
+    }
+
     public void sacar(){}
     public void depositar(){}
     public void verSaldo(){}
@@ -33,8 +49,12 @@ public class ContaBancaria {
         return agencia;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public String getClientePF() {
+        return pessoaFisica.toString();
+    }
+
+    public String getClientePJ() {
+        return pessoaJuridica.toString();
     }
 
     public double getSaldo() {
