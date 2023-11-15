@@ -1,10 +1,9 @@
 public class ContaBancaria {
     private String agencia;
-    private String cliente;
-    //mudar o tipo para Cliente quando a classe tiver pronta
+    private Cliente cliente;
     private double saldo;
 
-    public ContaBancaria(String cliente) {
+    public ContaBancaria(Cliente cliente) {
         this.cliente = cliente;
         this.agencia = "0404-1";
         this.saldo = 0;
@@ -34,7 +33,7 @@ public class ContaBancaria {
         return agencia;
     }
 
-    public String getCliente() {
+    public Cliente getCliente() {
         return cliente;
     }
 
