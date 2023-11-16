@@ -2,10 +2,9 @@ public class ContaBancaria {
     private String agencia;
     private PessoaFisica pessoaFisica;
     private PessoaJuridica pessoaJuridica;
-
     private double saldo;
 
-    public ContaBancaria(Cliente cliente) {
+    public ContaBancaria() {
         this.agencia = "0404-1";
         this.saldo = 0;
     }
@@ -31,6 +30,14 @@ public class ContaBancaria {
         System.out.printf("Saldo - R$%.2f\n", this.saldo);
     }
 
+    public void verDadosDoClientePF() {
+        System.out.println(pessoaFisica.toString());
+    }
+
+    public void verDadosDoClientePJ() {
+        System.out.println(pessoaJuridica.toString());
+    }
+
     public void abrirContaPF(String nome, String cpf, String email, String telefone) {
         pessoaFisica = new PessoaFisica(1,email, telefone, nome, cpf);
     }
@@ -39,11 +46,29 @@ public class ContaBancaria {
         pessoaJuridica = new PessoaJuridica(1,email, telefone, razaoSocial, cnpj);
     }
 
-    public void sacar(){}
-    public void depositar(){}
-    public void verSaldo(){}
-    public void transferir(){}
-    public void encerrarConta(){}
+    public void sacar(double valor){
+        if(this.saldo < valor) {
+            System.out.println("Saldo insuficiente");
+        } else {
+            this.saldo -= valor;
+            System.out.printf("\nSucesso! Seu saldo: R$%.2f\n", getSaldo());
+        }
+    }
+    public void depositar(double valor){
+        this.saldo += valor;
+        System.out.printf("\nSucesso! Seu saldo: R$%.2f\n", getSaldo());
+    }
+    public void verSaldo(){
+        System.out.printf("\nSeu saldo: R$%.2f\n", getSaldo());
+    }
+    public void transferir(String conta, double valor){
+        if(this.saldo < valor) {
+            System.out.println("Saldo insuficiente");
+        } else {
+            this.saldo -= valor;
+            System.out.printf("\nSucesso! Seu saldo: R$%.2f\n", getSaldo());
+        }
+    }
 
     public String getAgencia() {
         return agencia;
@@ -60,6 +85,4 @@ public class ContaBancaria {
     public double getSaldo() {
         return saldo;
     }
-
-    //mudar o tipo do cliente quando tiver a classe Cliente
 }
