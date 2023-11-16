@@ -1,11 +1,9 @@
 
-package main;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
 
-public class AgenciaBancaria {
+public class Main {
 
     static Scanner input = new Scanner(System.in);
     static ArrayList<Conta> contasBancarias;
@@ -13,6 +11,7 @@ public class AgenciaBancaria {
     public static void main(String[] args) {
         contasBancarias = new ArrayList<Conta>();
         operacoes();
+
     }
 
     public static void operacoes() {
