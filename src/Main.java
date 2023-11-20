@@ -6,16 +6,15 @@ import java.util.Scanner;
 public class Main {
 
     static Scanner input = new Scanner(System.in);
-    static ArrayList<Conta> contasBancarias;
+    static ArrayList<ContaBancaria> contasBancarias;
 
     public static void main(String[] args) {
-        contasBancarias = new ArrayList<Conta>();
+        contasBancarias = new ArrayList<ContaBancaria>();
         operacoes();
 
     }
 
     public static void operacoes() {
-
         System.out.println("------------------------------------------------------");
         System.out.println("-------------Bem vindos a nossa Agência---------------");
         System.out.println("------------------------------------------------------");
@@ -63,8 +62,23 @@ public class Main {
     }
 
     public static void criarConta() {
-        //System.out.println("Você está criando uma conta\n");
+        System.out.println("Você deseja abrir uma conta para Pessoa Física (1) ou Pessoa Jurídica (2)?");
+        int tipoCliente = input.nextInt();
 
+        System.out.println("Deseja abrir uma conta Corrente (1) ou Poupança (2)?");
+        int tipoConta = input.nextInt();
+
+        if (tipoCliente == 1) {
+            criarContaPessoaFisica(tipoConta);
+        } else if (tipoCliente == 2) {
+            criarContaPessoaJuridica(tipoConta);
+        } else {
+            System.out.println("Opção inválida!");
+            operacoes();
+        }
+    }
+
+    public static void criarContaPessoaFisica(int tipoConta) {
         System.out.println("\nNome: ");
         String nome = input.next();
 
@@ -74,104 +88,63 @@ public class Main {
         System.out.println("Email: ");
         String email = input.next();
 
-        Pessoa cliente = new Pessoa(nome, cpf, email);
+        Cliente cliente = new PessoaFisica(nome, cpf, email);
 
-        Conta conta = new Conta(cliente);
-
-        contasBancarias.add(conta);
-        System.out.println("--- Sua conta foi criada com sucesso! ---");
+        if (tipoConta == 1) {
+            ContaCorrente conta = new ContaCorrente(cliente);
+            contasBancarias.add(conta);
+            System.out.println("--- Sua conta corrente foi criada com sucesso! ---");
+        } else if (tipoConta == 2) {
+            ContaPoupanca conta = new ContaPoupanca(cliente);
+            contasBancarias.add(conta);
+            System.out.println("--- Sua conta poupança foi criada com sucesso! ---");
+        } else {
+            System.out.println("Opção inválida!");
+        }
 
         operacoes();
-
     }
 
-    private static Conta encontrarConta(int numeroConta) {
-        Conta conta = null;
-        if(contasBancarias.size() > 0) {
-            for(Conta contaa : contasBancarias) {
-                if(contaa.getNumeroConta() == numeroConta) {
-                    conta = contaa;
-                }
-            }
+    public static void criarContaPessoaJuridica(int tipoConta) {
+        System.out.println("\nNome da empresa: ");
+        String nomeEmpresa = input.next();
+
+        System.out.println("\nCNPJ: ");
+        String cnpj = input.next();
+
+        System.out.println("Email da empresa: ");
+        String emailEmpresa = input.next();
+
+        Cliente cliente = new PessoaJuridica(nomeEmpresa, cnpj, emailEmpresa);
+
+        if (tipoConta == 1) {
+            ContaCorrente conta = new ContaCorrente(cliente);
+            contasBancarias.add(conta);
+            System.out.println("--- Sua conta corrente foi criada com sucesso! ---");
+        } else if (tipoConta == 2) {
+            ContaPoupanca conta = new ContaPoupanca(cliente);
+            contasBancarias.add(conta);
+            System.out.println("--- Sua conta poupança foi criada com sucesso! ---");
+        } else {
+            System.out.println("Opção inválida!");
         }
-        return conta;
+
+        operacoes();
     }
 
     public static void depositar() {
-        System.out.println("Número da conta: ");
-        int numeroConta = input.nextInt();
-        Conta conta = encontrarConta(numeroConta);
-
-        if(conta != null) {
-            System.out.println("Qual valor deseja depositar? ");
-            Double valorDeposito = input.nextDouble();
-
-            conta.depositar(valorDeposito);
-        }else {
-            System.out.println("--- Conta não encontrada ---");
-        }
-
-        operacoes();
-
+        // Implementação do método depositar
     }
 
     public static void sacar() {
-        System.out.println("Número da conta: ");
-        int numeroConta = input.nextInt();
-
-        Conta conta = encontrarConta(numeroConta);
-
-        if(conta != null) {
-            System.out.println("Qual valor deseja sacar? ");
-            Double valorSaque = input.nextDouble();
-
-            conta.sacar(valorSaque);
-            System.out.println("--- Saque realizado com sucesso! ---");
-        }else {
-            System.out.println("--- Conta não encontrada ---");
-        }
-
-        operacoes();
-
+        // Implementação do método sacar
     }
 
     public static void transferir() {
-        System.out.println("Número da conta que vai enviar a transferência: ");
-        int numeroContaRemetente = input.nextInt();
-
-        Conta contaRemetente = encontrarConta(numeroContaRemetente);
-
-        if(contaRemetente != null) {
-            System.out.println("Número da conta do destinatário: ");
-            int numeroContaDestinatario = input.nextInt();
-
-            Conta contaDestinatario = encontrarConta(numeroContaDestinatario);
-
-            if(contaDestinatario != null) {
-                System.out.println("Valor da transferência: ");
-                Double valor = input.nextDouble();
-
-                contaRemetente.transferencia(contaDestinatario, valor);
-
-            }else {
-                System.out.println("--- A conta para depósito não foi encontrada ---");
-            }
-
-        }else {
-            System.out.println("--- Conta para transferência não encontrada ---");
-        }
-        operacoes();
+        // Implementação do método transferir
     }
 
     public static void listarContas() {
-        if(contasBancarias.size() > 0) {
-            for(Conta conta: contasBancarias) {
-                System.out.println(conta);
-            }
-        }else {
-            System.out.println("--- Não há contas cadastradas ---");
-        }
-
-        operacoes();
+        // Implementação do método listarContas
     }
 }
