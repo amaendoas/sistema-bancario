@@ -1,9 +1,10 @@
+import java.text.DecimalFormat;
 public class PessoaJuridica extends Cliente {
     private String razaoSocial;
     private String cnpj;
 
     public PessoaJuridica(int id, String email, String telefone, String razaoSocial, String cnpj) {
-        super(id, email, telefone);
+        super(email, telefone);
         this.razaoSocial = razaoSocial;
         this.cnpj = cnpj;
     }
@@ -17,7 +18,9 @@ public class PessoaJuridica extends Cliente {
     }
 
     public String getCnpj() {
-        return cnpj;
+
+        DecimalFormat df2 = new DecimalFormat("##.###.###/####-##");
+        return df2.format(Long.parseLong(cnpj));
     }
 
     public void setCnpj(String cnpj) {

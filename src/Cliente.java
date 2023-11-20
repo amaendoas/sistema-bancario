@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 public class Cliente {
     private String email;
     private String telefone;
@@ -15,7 +16,9 @@ public class Cliente {
     }
 
     public String getTelefone() {
-        return telefone;
+        DecimalFormat df = new DecimalFormat("(##) #####-###");
+        return df.format(Long.parseLong(telefone));
+
     }
 
     public void setTelefone(String telefone) {

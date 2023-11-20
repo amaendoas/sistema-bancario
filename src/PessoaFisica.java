@@ -1,10 +1,11 @@
+import java.text.DecimalFormat;
 public class PessoaFisica extends Cliente {
     private String nome;
     private String cpf;
 
 
     public PessoaFisica(int id, String email, String telefone, String nome, String cpf) {
-        super(id, email, telefone);
+        super(email, telefone);
         this.nome = nome;
         this.cpf = cpf;
     }
@@ -18,7 +19,8 @@ public class PessoaFisica extends Cliente {
     }
 
     public String getCpf() {
-        return cpf;
+        DecimalFormat df2 = new DecimalFormat("###.###.###-##");
+        return df2.format(Long.parseLong(cpf));
     }
 
     public void setCpf(String cpf) {
