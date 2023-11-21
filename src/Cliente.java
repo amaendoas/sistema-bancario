@@ -16,12 +16,17 @@ public class Cliente {
     }
 
     public String getTelefone() {
-        DecimalFormat df = new DecimalFormat("(##) #####-###");
-        return df.format(Long.parseLong(telefone));
+       return formatarTelefone(telefone);
 
     }
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+    public static String formatarTelefone(String telefone) {
+        return String.format("(%s) %s-%s",
+                telefone.substring(0, 2),
+                telefone.substring(2, 7),
+                telefone.substring(7, 11));
     }
 }

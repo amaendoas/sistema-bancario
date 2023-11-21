@@ -39,11 +39,11 @@ public class ContaBancaria {
     }
 
     public void abrirContaPF(String nome, String cpf, String email, String telefone) {
-        pessoaFisica = new PessoaFisica(1,email, telefone, nome, cpf);
+        pessoaFisica = new PessoaFisica(email, telefone, nome, cpf);
     }
 
     public void abrirContaPJ(String razaoSocial, String cnpj, String email, String telefone) {
-        pessoaJuridica = new PessoaJuridica(1,email, telefone, razaoSocial, cnpj);
+        pessoaJuridica = new PessoaJuridica(email, telefone, razaoSocial, cnpj);
     }
 
     public void sacar(double valor){
