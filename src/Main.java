@@ -9,7 +9,8 @@ public class Main {
     static ArrayList<Conta> contasBancarias;
 
     public static void main(String[] args) {
-        contasBancarias = new ArrayList<Conta>();
+
+         contasBancarias = new ArrayList<Conta>();
         operacoes();
 
     }
