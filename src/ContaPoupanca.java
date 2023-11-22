@@ -1,7 +1,7 @@
 public class ContaPoupanca extends ContaBancaria {
     private String numeroDeConta;
     private String tipo;
-    public ContaPoupanca() {
+    public ContaPoupanca(Cliente cliente) {
         super();
         this.numeroDeConta = gerarNumeroConta();
         this.tipo = getTipo();

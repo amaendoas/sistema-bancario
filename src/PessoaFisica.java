@@ -1,10 +1,9 @@
-import java.text.DecimalFormat;
 public class PessoaFisica extends Cliente {
     private String nome;
     private String cpf;
 
 
-    public PessoaFisica(String email, String telefone, String nome, String cpf) {
+    public PessoaFisica(String email, String telefone, String nome) {
         super(email, telefone);
         this.nome = nome;
         this.cpf = cpf;

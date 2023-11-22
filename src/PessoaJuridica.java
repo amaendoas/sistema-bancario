@@ -1,9 +1,8 @@
-import java.text.DecimalFormat;
 public class PessoaJuridica extends Cliente {
     private String razaoSocial;
     private String cnpj;
 
-    public PessoaJuridica(String email, String telefone, String razaoSocial, String cnpj) {
+    public PessoaJuridica(String email, String telefone, String razaoSocial) {
         super(email, telefone);
         this.razaoSocial = razaoSocial;
         this.cnpj = cnpj;

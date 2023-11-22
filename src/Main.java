@@ -178,18 +178,18 @@ public class Main {
     public static void transferir() {
         System.out.println("Digite o número da conta remetente: ");
         String numeroContaRemetente = input.next();
-        ContaBancaria contaRemetente = encontrarConta(numeroContaRemetente);
+        ContaBancaria contaRemetente = encontrarConta(Integer.parseInt(numeroContaRemetente));
 
         if (contaRemetente != null) {
             System.out.println("Digite o número da conta destinatária: ");
             String numeroContaDestinatario = input.next();
-            ContaBancaria contaDestinatario = encontrarConta(numeroContaDestinatario);
+            ContaBancaria contaDestinatario = encontrarConta(Integer.parseInt(numeroContaDestinatario));
 
             if (contaDestinatario != null) {
                 System.out.println("Digite o valor a ser transferido: ");
                 double valorTransferencia = input.nextDouble();
 
-                contaRemetente.transferir(contaDestinatario, valorTransferencia);
+                contaRemetente.transferir(String.valueOf(contaDestinatario), valorTransferencia);
             } else {
                 System.out.println("--- Conta destinatária não encontrada ---");
             }
@@ -203,7 +203,7 @@ public class Main {
     public static void verSaldo() {
         System.out.println("Digite o número da conta: ");
         String numeroConta = input.next();
-        ContaBancaria conta = encontrarConta(numeroConta);
+        ContaBancaria conta = encontrarConta(Integer.parseInt(numeroConta));
 
         if (conta != null) {
             System.out.println("Saldo da conta " + conta.getNumeroConta() + ": R$ " + conta.getSaldo());

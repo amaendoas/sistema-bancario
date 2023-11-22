@@ -7,6 +7,7 @@ public class ContaBancaria {
     public ContaBancaria() {
         this.agencia = "0404-1";
         this.saldo = 0;
+
     }
 
     public String gerarNumero() {
@@ -39,20 +40,21 @@ public class ContaBancaria {
     }
 
     public void abrirContaPF(String nome, String cpf, String email, String telefone) {
-        pessoaFisica = new PessoaFisica(email, telefone, nome, cpf);
+        pessoaFisica = new PessoaFisica(email, telefone, nome);
     }
 
     public void abrirContaPJ(String razaoSocial, String cnpj, String email, String telefone) {
-        pessoaJuridica = new PessoaJuridica(email, telefone, razaoSocial, cnpj);
+        pessoaJuridica = new PessoaJuridica(email, telefone, razaoSocial);
     }
 
-    public void sacar(double valor){
+    public boolean sacar(double valor){
         if(this.saldo < valor) {
             System.out.println("Saldo insuficiente");
         } else {
             this.saldo -= valor;
             System.out.printf("\nSucesso! Seu saldo: R$%.2f\n", getSaldo());
         }
+        return false;
     }
     public void depositar(double valor){
         this.saldo += valor;
@@ -84,5 +86,9 @@ public class ContaBancaria {
 
     public double getSaldo() {
         return saldo;
+    }
+
+    public int getNumeroConta() {
+        return 0;
     }
 }
