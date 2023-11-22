@@ -19,8 +19,6 @@ public class PessoaFisica extends Cliente {
     }
 
     public String getCpf() {
-//        DecimalFormat df2 = new DecimalFormat("###.###.###-##");
-//        return df2.format(Long.parseLong(cpf));
         return formatarCPF(cpf);
     }
 
