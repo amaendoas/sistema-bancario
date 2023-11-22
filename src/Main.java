@@ -1,7 +1,5 @@
-
 import java.util.ArrayList;
 import java.util.Scanner;
-
 
 public class Main {
 
@@ -11,7 +9,6 @@ public class Main {
     public static void main(String[] args) {
         contasBancarias = new ArrayList<ContaBancaria>();
         operacoes();
-
     }
 
     public static void operacoes() {
@@ -24,7 +21,7 @@ public class Main {
         System.out.println("|   Opção 2 - Depositar     |");
         System.out.println("|   Opção 3 - Sacar         |");
         System.out.println("|   Opção 4 - Transferir    |");
-        System.out.println("|   Opção 5 - Listar        |");
+        System.out.println("|   Opção 5 - Ver Saldo     |");
         System.out.println("|   Opção 6 - Sair          |");
 
         int operacao = input.nextInt();
@@ -47,7 +44,7 @@ public class Main {
                 break;
 
             case 5:
-                listarContas();
+                verSaldo();
                 break;
 
             case 6:
@@ -61,7 +58,19 @@ public class Main {
         }
     }
 
+    public static ContaBancaria encontrarConta(int numeroConta) {
+        for (ContaBancaria conta : contasBancarias) {
+            if (conta.getNumeroConta() == numeroConta) {
+                return conta;
+            }
+        }
+        return null; // Retorna null se a conta não for encontrada
+    }
+
+
     public static void criarConta() {
+        System.out.println("Bem-vindo! Para criar sua conta, precisamos de algumas informações.");
+
         System.out.println("Você deseja abrir uma conta para Pessoa Física (1) ou Pessoa Jurídica (2)?");
         int tipoCliente = input.nextInt();
 
@@ -92,11 +101,9 @@ public class Main {
 
         if (tipoConta == 1) {
             ContaCorrente conta = new ContaCorrente(cliente);
-            contasBancarias.add(conta);
             System.out.println("--- Sua conta corrente foi criada com sucesso! ---");
         } else if (tipoConta == 2) {
             ContaPoupanca conta = new ContaPoupanca(cliente);
-            contasBancarias.add(conta);
             System.out.println("--- Sua conta poupança foi criada com sucesso! ---");
         } else {
             System.out.println("Opção inválida!");
@@ -119,11 +126,9 @@ public class Main {
 
         if (tipoConta == 1) {
             ContaCorrente conta = new ContaCorrente(cliente);
-            contasBancarias.add(conta);
             System.out.println("--- Sua conta corrente foi criada com sucesso! ---");
         } else if (tipoConta == 2) {
             ContaPoupanca conta = new ContaPoupanca(cliente);
-            contasBancarias.add(conta);
             System.out.println("--- Sua conta poupança foi criada com sucesso! ---");
         } else {
             System.out.println("Opção inválida!");
@@ -133,18 +138,80 @@ public class Main {
     }
 
     public static void depositar() {
-        // Implementação do método depositar
+        System.out.println("Digite o número da conta: ");
+        int numeroConta = input.nextInt();
+        ContaBancaria conta = encontrarConta(numeroConta);
+
+        if (conta != null) {
+            System.out.println("Digite o valor a ser depositado: ");
+            double valorDeposito = input.nextDouble();
+            conta.depositar(valorDeposito);
+            System.out.println("--- Depósito realizado com sucesso! ---");
+        } else {
+            System.out.println("--- Conta não encontrada ---");
+        }
+
+        operacoes();
     }
 
     public static void sacar() {
-        // Implementação do método sacar
+        System.out.println("Digite o número da conta: ");
+        int numeroConta = input.nextInt();
+        ContaBancaria conta = encontrarConta(numeroConta);
+
+        if (conta != null) {
+            System.out.println("Digite o valor a ser sacado: ");
+            double valorSaque = input.nextDouble();
+
+            if (conta.sacar(valorSaque)) {
+                System.out.println("--- Saque realizado com sucesso! ---");
+            } else {
+                System.out.println("--- Saldo insuficiente ---");
+            }
+        } else {
+            System.out.println("--- Conta não encontrada ---");
+        }
+
+        operacoes();
     }
 
     public static void transferir() {
-        // Implementação do método transferir
+        System.out.println("Digite o número da conta remetente: ");
+        String numeroContaRemetente = input.next();
+        ContaBancaria contaRemetente = encontrarConta(numeroContaRemetente);
+
+        if (contaRemetente != null) {
+            System.out.println("Digite o número da conta destinatária: ");
+            String numeroContaDestinatario = input.next();
+            ContaBancaria contaDestinatario = encontrarConta(numeroContaDestinatario);
+
+            if (contaDestinatario != null) {
+                System.out.println("Digite o valor a ser transferido: ");
+                double valorTransferencia = input.nextDouble();
+
+                contaRemetente.transferir(contaDestinatario, valorTransferencia);
+            } else {
+                System.out.println("--- Conta destinatária não encontrada ---");
+            }
+        } else {
+            System.out.println("--- Conta remetente não encontrada ---");
+        }
+
+        operacoes();
     }
 
-    public static void listarContas() {
-        // Implementação do método listarContas
+    public static void verSaldo() {
+        System.out.println("Digite o número da conta: ");
+        String numeroConta = input.next();
+        ContaBancaria conta = encontrarConta(numeroConta);
+
+        if (conta != null) {
+            System.out.println("Saldo da conta " + conta.getNumeroConta() + ": R$ " + conta.getSaldo());
+        } else {
+            System.out.println("--- Conta não encontrada ---");
+        }
+
+        operacoes();
     }
+
 }
