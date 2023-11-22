@@ -1,10 +1,11 @@
+import java.text.DecimalFormat;
 public class PessoaFisica extends Cliente {
     private String nome;
     private String cpf;
 
 
-    public PessoaFisica(int id, String email, String telefone, String nome, String cpf) {
-        super(id, email, telefone);
+    public PessoaFisica(String email, String telefone, String nome, String cpf) {
+        super(email, telefone);
         this.nome = nome;
         this.cpf = cpf;
     }
@@ -18,13 +19,23 @@ public class PessoaFisica extends Cliente {
     }
 
     public String getCpf() {
-        return cpf;
+        return formatarCPF(cpf);
     }
 
     public void setCpf(String cpf) {
+
         this.cpf = cpf;
     }
 
+    public static String formatarCPF(String cpfNumeros) {
+
+        return String.format("%s.%s.%s-%s",
+                cpfNumeros.substring(0, 3),
+                cpfNumeros.substring(3, 6),
+                cpfNumeros.substring(6, 9),
+                cpfNumeros.substring(9));
+
+    }
     @Override
     public String toString() {
         return "Nome - " + getNome() + "\n" +
