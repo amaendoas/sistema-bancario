@@ -111,6 +111,7 @@ public class Main {
         System.out.println("\nTelefone: ");
         String telefone = input.next();
 
+
         if (tipoConta == 1) {
             contaCorrente.abrirContaPF(nome, cpf, email, telefone);
             System.out.println("--- Sua conta corrente foi criada com sucesso! ---");
@@ -136,17 +137,23 @@ public class Main {
         System.out.println("Email da empresa: ");
         String emailEmpresa = input.next();
 
-        Cliente cliente = new PessoaJuridica(nomeEmpresa, cnpj, emailEmpresa);
+          System.out.println("\nTelefone: ");
+        String telefone = input.next();
+
 
         if (tipoConta == 1) {
-            ContaCorrente conta = new ContaCorrente(cliente);
+            contaCorrente.abrirContaPJ(nomeEmpresa, cnpj, emailEmpresa, telefone);
             System.out.println("--- Sua conta corrente foi criada com sucesso! ---");
+            contaCorrente.verConta();
         } else if (tipoConta == 2) {
-            ContaPoupanca conta = new ContaPoupanca(cliente);
+            contaPoupanca.abrirContaPJ(nomeEmpresa, cnpj, emailEmpresa, telefone );
             System.out.println("--- Sua conta poupança foi criada com sucesso! ---");
+            contaPoupanca.verConta();
         } else {
             System.out.println("Opção inválida!");
         }
+
+        voltar();
 
         operacoes();
     }
@@ -155,10 +162,10 @@ public class Main {
         System.out.println("Digite o número da conta: ");
         int numeroConta = input.nextInt();
 
-        if (conta != null) {
+        if (numeroConta!= null) {
             System.out.println("Digite o valor a ser depositado: ");
             double valorDeposito = input.nextDouble();
-            conta.depositar(valorDeposito);
+            numeroConta.depositar(valorDeposito);
             System.out.println("--- Depósito realizado com sucesso! ---");
         } else {
             System.out.println("--- Conta não encontrada ---");
@@ -171,11 +178,11 @@ public class Main {
         System.out.println("Digite o número da conta: ");
         int numeroConta = input.nextInt();
 
-        if (conta != null) {
+        if (numeroConta != null) {
             System.out.println("Digite o valor a ser sacado: ");
             double valorSaque = input.nextDouble();
 
-            if (conta.sacar(valorSaque)) {
+            if (numeroConta.sacar(valorSaque)) {
                 System.out.println("--- Saque realizado com sucesso! ---");
             } else {
                 System.out.println("--- Saldo insuficiente ---");
