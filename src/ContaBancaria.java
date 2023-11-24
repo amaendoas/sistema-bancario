@@ -40,11 +40,11 @@ public class ContaBancaria {
     }
 
     public void abrirContaPF(String nome, String cpf, String email, String telefone) {
-        pessoaFisica = new PessoaFisica(email, telefone, nome);
+        pessoaFisica = new PessoaFisica(email, telefone, nome, cpf);
     }
 
     public void abrirContaPJ(String razaoSocial, String cnpj, String email, String telefone) {
-        pessoaJuridica = new PessoaJuridica(email, telefone, razaoSocial);
+        pessoaJuridica = new PessoaJuridica(email, telefone, razaoSocial, cnpj);
     }
 
     public boolean sacar(double valor){

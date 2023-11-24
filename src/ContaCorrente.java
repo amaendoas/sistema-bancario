@@ -1,7 +1,7 @@
 public class ContaCorrente extends ContaBancaria {
     private String numeroDeConta;
     private String tipo;
-    public ContaCorrente(Cliente cliente) {
+    public ContaCorrente() {
         super();
         this.numeroDeConta = gerarNumero();
         this.tipo = getTipo();

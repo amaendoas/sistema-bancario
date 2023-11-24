@@ -4,10 +4,10 @@ import java.util.Scanner;
 public class Main {
 
     static Scanner input = new Scanner(System.in);
-    static ArrayList<ContaBancaria> contasBancarias;
+    static ContaCorrente contaCorrente = new ContaCorrente();
+    static ContaPoupanca contaPoupanca = new ContaPoupanca();
 
     public static void main(String[] args) {
-        contasBancarias = new ArrayList<ContaBancaria>();
         operacoes();
     }
 
@@ -30,22 +30,22 @@ public class Main {
             case 1:
                 criarConta();
                 break;
-
-            case 2:
-                depositar();
-                break;
-
-            case 3:
-                sacar();
-                break;
-
-            case 4:
-                transferir();
-                break;
-
-            case 5:
-                verSaldo();
-                break;
+//
+//            case 2:
+//                depositar();
+//                break;
+//
+//            case 3:
+//                sacar();
+//                break;
+//
+//            case 4:
+//                transferir();
+//                break;
+//
+//            case 5:
+//                verSaldo();
+//                break;
 
             case 6:
                 System.out.println("Flw é nóis!");
@@ -58,13 +58,24 @@ public class Main {
         }
     }
 
-    public static ContaBancaria encontrarConta(int numeroConta) {
-        for (ContaBancaria conta : contasBancarias) {
-            if (conta.getNumeroConta() == numeroConta) {
-                return conta;
-            }
+    public static void voltar (){
+        System.out.println("***** O que deseja fazer agora? *****");
+        System.out.println("------------------------------------------------------");
+        System.out.println("|   Opção 1 - Voltar ao menu  |");
+        System.out.println("|   Opção 2 - Sair          |");
+
+        int resposta = input.nextInt();
+
+        if(resposta == 1) {
+            operacoes();
+        } else if(resposta == 2) {
+            System.out.println("Flw é nóis!");
+            System.exit(0); // para o sistema
+        } else {
+            System.out.println("Opção inválida!");
+            voltar();
         }
-        return null; // Retorna null se a conta não for encontrada
+
     }
 
 
@@ -94,22 +105,25 @@ public class Main {
         System.out.println("\nCPF: ");
         String cpf = input.next();
 
-        System.out.println("Email: ");
+        System.out.println("\nEmail: ");
         String email = input.next();
 
-        Cliente cliente = new PessoaFisica(nome, cpf, email);
+        System.out.println("\nTelefone: ");
+        String telefone = input.next();
 
         if (tipoConta == 1) {
-            ContaCorrente conta = new ContaCorrente(cliente);
+            contaCorrente.abrirContaPF(nome, cpf, email, telefone);
             System.out.println("--- Sua conta corrente foi criada com sucesso! ---");
+            contaCorrente.verConta();
         } else if (tipoConta == 2) {
-            ContaPoupanca conta = new ContaPoupanca(cliente);
+            contaPoupanca.abrirContaPF(nome, cpf, email, telefone);
             System.out.println("--- Sua conta poupança foi criada com sucesso! ---");
+            contaPoupanca.verConta();
         } else {
             System.out.println("Opção inválida!");
         }
 
-        operacoes();
+        voltar();
     }
 
     public static void criarContaPessoaJuridica(int tipoConta) {
@@ -140,7 +154,6 @@ public class Main {
     public static void depositar() {
         System.out.println("Digite o número da conta: ");
         int numeroConta = input.nextInt();
-        ContaBancaria conta = encontrarConta(numeroConta);
 
         if (conta != null) {
             System.out.println("Digite o valor a ser depositado: ");
@@ -157,7 +170,6 @@ public class Main {
     public static void sacar() {
         System.out.println("Digite o número da conta: ");
         int numeroConta = input.nextInt();
-        ContaBancaria conta = encontrarConta(numeroConta);
 
         if (conta != null) {
             System.out.println("Digite o valor a ser sacado: ");
@@ -178,12 +190,11 @@ public class Main {
     public static void transferir() {
         System.out.println("Digite o número da conta remetente: ");
         String numeroContaRemetente = input.next();
-        ContaBancaria contaRemetente = encontrarConta(Integer.parseInt(numeroContaRemetente));
+
 
         if (contaRemetente != null) {
             System.out.println("Digite o número da conta destinatária: ");
             String numeroContaDestinatario = input.next();
-            ContaBancaria contaDestinatario = encontrarConta(Integer.parseInt(numeroContaDestinatario));
 
             if (contaDestinatario != null) {
                 System.out.println("Digite o valor a ser transferido: ");
@@ -203,7 +214,6 @@ public class Main {
     public static void verSaldo() {
         System.out.println("Digite o número da conta: ");
         String numeroConta = input.next();
-        ContaBancaria conta = encontrarConta(Integer.parseInt(numeroConta));
 
         if (conta != null) {
             System.out.println("Saldo da conta " + conta.getNumeroConta() + ": R$ " + conta.getSaldo());
