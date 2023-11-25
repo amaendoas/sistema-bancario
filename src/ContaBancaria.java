@@ -7,7 +7,6 @@ public class ContaBancaria {
     public ContaBancaria() {
         this.agencia = "0404-1";
         this.saldo = 0;
-
     }
 
     public String gerarNumero() {
