@@ -17,6 +17,7 @@ public class ContaBancaria {
     }
 
     public void verContaBancaria(String tipo, String numeroDaConta){
+        System.out.println("--------------------------------------------------");
         if(pessoaJuridica != null) {
             System.out.printf("Olá, %s, aqui estão as informações da sua conta:\n", pessoaJuridica.getRazaoSocial());
         }
@@ -26,8 +27,8 @@ public class ContaBancaria {
         }
         System.out.printf("Tipo - %s\n", tipo);
         System.out.printf("Número - %s\n", numeroDaConta);
-        System.out.printf("Agência - %s\n", this.agencia);
-        System.out.printf("Saldo - R$%.2f\n", this.saldo);
+        System.out.printf("Agência - %s\n", getAgencia());
+        System.out.printf("Saldo - R$%.2f\n", getSaldo());
     }
 
     public void abrirContaPF(String nome, String cpf, String email, String telefone) {
@@ -61,9 +62,6 @@ public class ContaBancaria {
         this.saldo += valor;
         System.out.printf("\nSucesso! Seu saldo: R$%.2f\n", getSaldo());
     }
-    public void verSaldo(){
-        System.out.printf("\nSeu saldo: R$%.2f\n", getSaldo());
-    }
     public void transferir(String conta, double valor){
         if(this.saldo < valor) {
             System.out.println("Saldo insuficiente");
@@ -71,6 +69,9 @@ public class ContaBancaria {
             this.saldo -= valor;
             System.out.printf("\nSucesso! Seu saldo: R$%.2f\n", getSaldo());
         }
+    }
+    public void verSaldo(){
+        System.out.printf("\nSeu saldo: R$%.2f\n", getSaldo());
     }
 
     public String getAgencia() {

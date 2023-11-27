@@ -86,7 +86,8 @@ public class Main {
         System.out.println("|                   3 - Transferir                    |");
         System.out.println("|                   4 - Ver Saldo                     |");
         System.out.println("|                   5 - Ver Meus Dados                |");
-        System.out.println("|                   6 - Sair                          |");
+        System.out.println("|                   6 - Ver Dados Da Conta            |");
+        System.out.println("|                   7 - Sair                          |");
         System.out.println("-------------------------------------------------------");
         System.out.println("Digite o número da operação que deseja realizar: ");
         System.out.print("> ");
@@ -111,10 +112,14 @@ public class Main {
                 break;
 
             case "5":
-                verDados();
+                verDadosDoCliente();
                 break;
 
             case "6":
+                verDadosDaConta();
+                break;
+
+            case "7":
                 sair();
                 break;
 
@@ -138,7 +143,8 @@ public class Main {
         String tipoConta = input.nextLine();
 
         System.out.println("--------------------------------------------------");
-        System.out.println("Para criar sua conta, precisamos de algumas informações.");
+        System.out.println("Para criar sua conta, precisamos de algumas informações:");
+        System.out.println("--------------------------------------------------");
 
         if (tipoCliente.equals("1")) {
             criarContaPessoaFisica(tipoConta);
@@ -151,26 +157,27 @@ public class Main {
     }
 
     public static void criarContaPessoaFisica(String tipoConta) {
-        System.out.println("\nNome: ");
+        System.out.println("Nome: ");
         System.out.print("> ");
         String nome = input.nextLine();
 
-        System.out.println("\nCPF (apenas números): ");
+        System.out.println("CPF (apenas números): ");
         System.out.print("> ");
         String cpf = input.nextLine();
 
-        System.out.println("\nEmail: ");
+        System.out.println("Email: ");
         System.out.print("> ");
+
         String email = input.nextLine();
 
-        System.out.println("\nTelefone (apenas números): ");
+        System.out.println("Telefone (apenas números): ");
         System.out.print("> ");
         String telefone = input.nextLine();
 
         if (tipoConta.equals("1")) {
             contaCorrente = new ContaCorrente();
             contaCorrente.abrirContaPF(nome, cpf, email, telefone);
-            System.out.println("--- Sua conta corrente foi criada com sucesso! ---");
+            System.out.println("--- Sua conta foi criada com sucesso! ---");
             System.out.println("--------------------------------------------------");
             contaCorrente.verConta();
         } else if (tipoConta.equals("2")) {
@@ -282,12 +289,23 @@ public class Main {
         voltar();
     }
 
-    public static void verDados() {
+    public static void verDadosDoCliente() {
 
         if (contaPoupanca != null) {
             contaPoupanca.verDadosCliente();
         }else if (contaCorrente != null) {
             contaCorrente.verDadosCliente();
+        }
+
+        voltar();
+    }
+
+    public static void verDadosDaConta() {
+
+        if (contaPoupanca != null) {
+            contaPoupanca.verConta();
+        }else if (contaCorrente != null) {
+            contaCorrente.verConta();
         }
 
         voltar();

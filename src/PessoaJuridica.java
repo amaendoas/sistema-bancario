@@ -36,10 +36,6 @@ public class PessoaJuridica extends Pessoa {
                 CNPJnumeros.substring(12, 14));
     }
 
-    public void verDados() {
-        System.out.println(this.toString());
-    }
-
     @Override
     public String toString() {
         return "Razão Social - " + getRazaoSocial() + "\n" +

@@ -1,9 +1,10 @@
 public class ContaPoupanca extends ContaBancaria {
     private String numeroDeConta;
     private String tipo;
+
     public ContaPoupanca() {
         super();
-        this.numeroDeConta = gerarNumeroConta();
+        this.numeroDeConta = getNumeroDeConta();
         this.tipo = getTipo();
     }
 
@@ -18,4 +19,9 @@ public class ContaPoupanca extends ContaBancaria {
     public String getTipo() {
         return "Conta Poupança";
     }
+
+    public String getNumeroDeConta() {
+        return gerarNumeroConta();
+    }
 }
+
