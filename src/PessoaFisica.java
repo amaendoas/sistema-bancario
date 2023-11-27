@@ -1,4 +1,4 @@
-public class PessoaFisica extends Cliente {
+public class PessoaFisica extends Pessoa {
     private String nome;
     private String cpf;
 
@@ -24,7 +24,6 @@ public class PessoaFisica extends Cliente {
     }
 
     public void setCpf(String cpf) {
-
         this.cpf = cpf;
     }
 
@@ -37,6 +36,7 @@ public class PessoaFisica extends Cliente {
                 cpfNumeros.substring(9));
 
     }
+
     @Override
     public String toString() {
         return "Nome - " + getNome() + "\n" +

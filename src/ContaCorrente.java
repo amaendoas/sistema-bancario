@@ -3,7 +3,7 @@ public class ContaCorrente extends ContaBancaria {
     private String tipo;
     public ContaCorrente() {
         super();
-        this.numeroDeConta = gerarNumero();
+        this.numeroDeConta = getNumeroDeConta();
         this.tipo = getTipo();
     }
 
@@ -13,5 +13,9 @@ public class ContaCorrente extends ContaBancaria {
 
     public String getTipo() {
         return "Conta Corrente";
+    }
+
+    public String getNumeroDeConta() {
+        return gerarNumero();
     }
 }
