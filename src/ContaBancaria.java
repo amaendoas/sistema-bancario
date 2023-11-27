@@ -30,20 +30,22 @@ public class ContaBancaria {
         System.out.printf("Saldo - R$%.2f\n", this.saldo);
     }
 
-    public void verDadosDoClientePF() {
-        System.out.println(pessoaFisica.toString());
-    }
-
-    public void verDadosDoClientePJ() {
-        System.out.println(pessoaJuridica.toString());
-    }
-
     public void abrirContaPF(String nome, String cpf, String email, String telefone) {
         pessoaFisica = new PessoaFisica(email, telefone, nome, cpf);
     }
 
     public void abrirContaPJ(String razaoSocial, String cnpj, String email, String telefone) {
         pessoaJuridica = new PessoaJuridica(email, telefone, razaoSocial, cnpj);
+    }
+
+    public void verDadosCliente() {
+        if(pessoaJuridica != null) {
+            System.out.println(pessoaJuridica.toString());
+        } else if(pessoaFisica != null) {
+            System.out.println(pessoaFisica.toString());
+        } else {
+            System.out.println("Erro! Dados não encontrados");
+        }
     }
 
     public boolean sacar(double valor){
@@ -75,19 +77,8 @@ public class ContaBancaria {
         return agencia;
     }
 
-    public String getClientePF() {
-        return pessoaFisica.toString();
-    }
-
-    public String getClientePJ() {
-        return pessoaJuridica.toString();
-    }
-
     public double getSaldo() {
         return saldo;
     }
 
-    public int getNumeroConta() {
-        return 0;
-    }
 }

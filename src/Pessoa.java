@@ -1,12 +1,11 @@
-import java.text.DecimalFormat;
-public class Cliente {
+public class Pessoa {
     private String email;
     private String telefone;
 
-    public Cliente() {
+    public Pessoa() {
     }
 
-    public Cliente(String email, String telefone) {
+    public Pessoa(String email, String telefone) {
         this.email = email;
         this.telefone = telefone;
     }

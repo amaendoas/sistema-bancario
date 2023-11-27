@@ -1,6 +1,3 @@
-import org.w3c.dom.ls.LSOutput;
-
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -14,7 +11,7 @@ public class Main {
     }
 
     public static void sair() {
-        System.out.println("Flw é nóis!");
+        System.out.println("Até logo!");
         System.exit(0);
     }
 
@@ -37,49 +34,25 @@ public class Main {
         }
 
     }
-
-    public static void operacoes() {
+    public static void entrar(){
         System.out.println();
-        System.out.println("-------------------------------------------------------");
-        System.out.println("-------------Bem vindo a área do cliente---------------");
-        System.out.println("-------------------------------------------------------");
-        System.out.println("|                     1 - Depositar                   |");
-        System.out.println("|                     2 - Sacar                       |");
-        System.out.println("|                     3 - Transferir                  |");
-        System.out.println("|                     4 - Ver Saldo                   |");
-        System.out.println("|                     5 - Sair                        |");
-        System.out.println("-------------------------------------------------------");
-        System.out.println("Digite o número da uma operação que deseja realizar: ");
+        System.out.println("------------------------------------------------------");
+        System.out.println("|             1 - Entrar na área do cliente          |");
+        System.out.println("|             2 - Sair                               |");
+        System.out.println("------------------------------------------------------");
+        System.out.println("O que deseja fazer agora? (Escolha uma opção): ");
         System.out.print("> ");
 
-        String operacao = input.nextLine();
 
-        switch (operacao) {
-            case "1":
-                depositar();
-                break;
+        String resposta = input.nextLine();
 
-            case "2":
-                sacar();
-                break;
-
-            case "3":
-                transferir();
-                break;
-
-            case "4":
-                verSaldo();
-                break;
-
-            case "5":
-                sair();
-                break;
-
-            default:
-                System.out.println("Opção inválida!");
-                System.out.println("--------------------------------------------------");
-                operacoes();
-                break;
+        if(resposta.equals("1")) {
+            operacoes();
+        } else if(resposta.equals("2")) {
+            sair();
+        } else {
+            System.out.println("Opção inválida!");
+            entrar();
         }
     }
 
@@ -103,28 +76,55 @@ public class Main {
 
     }
 
-    public static void entrar(){
+    public static void operacoes() {
         System.out.println();
-        System.out.println("------------------------------------------------------");
-        System.out.println("|             1 - Entrar na área do cliente          |");
-        System.out.println("|             2 - Sair                               |");
-        System.out.println("------------------------------------------------------");
-        System.out.println("O que deseja fazer agora? (Escolha uma opção): ");
+        System.out.println("-------------------------------------------------------");
+        System.out.println("-------------Bem vindo a área do cliente---------------");
+        System.out.println("-------------------------------------------------------");
+        System.out.println("|                   1 - Depositar                     |");
+        System.out.println("|                   2 - Sacar                         |");
+        System.out.println("|                   3 - Transferir                    |");
+        System.out.println("|                   4 - Ver Saldo                     |");
+        System.out.println("|                   5 - Ver Meus Dados                |");
+        System.out.println("|                   6 - Sair                          |");
+        System.out.println("-------------------------------------------------------");
+        System.out.println("Digite o número da operação que deseja realizar: ");
         System.out.print("> ");
 
+        String operacao = input.nextLine();
 
-        String resposta = input.nextLine();
+        switch (operacao) {
+            case "1":
+                depositar();
+                break;
 
-        if(resposta.equals("1")) {
-            operacoes();
-        } else if(resposta.equals("2")) {
-            sair();
-        } else {
-            System.out.println("Opção inválida!");
-            entrar();
+            case "2":
+                sacar();
+                break;
+
+            case "3":
+                transferir();
+                break;
+
+            case "4":
+                verSaldo();
+                break;
+
+            case "5":
+                verDados();
+                break;
+
+            case "6":
+                sair();
+                break;
+
+            default:
+                System.out.println("Opção inválida!");
+                System.out.println("--------------------------------------------------");
+                operacoes();
+                break;
         }
     }
-
 
     public static void criarConta() {
         System.out.println("Você deseja abrir uma conta para Pessoa Física (1) ou Pessoa Jurídica (2)?");
@@ -166,7 +166,6 @@ public class Main {
         System.out.println("\nTelefone (apenas números): ");
         System.out.print("> ");
         String telefone = input.nextLine();
-
 
         if (tipoConta.equals("1")) {
             contaCorrente = new ContaCorrente();
@@ -278,6 +277,17 @@ public class Main {
             contaPoupanca.verSaldo();
         }else if (contaCorrente != null) {
             contaCorrente.verSaldo();
+        }
+
+        voltar();
+    }
+
+    public static void verDados() {
+
+        if (contaPoupanca != null) {
+            contaPoupanca.verDadosCliente();
+        }else if (contaCorrente != null) {
+            contaCorrente.verDadosCliente();
         }
 
         voltar();

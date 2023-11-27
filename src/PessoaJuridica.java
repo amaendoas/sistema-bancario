@@ -1,4 +1,4 @@
-public class PessoaJuridica extends Cliente {
+public class PessoaJuridica extends Pessoa {
     private String razaoSocial;
     private String cnpj;
 
@@ -34,7 +34,10 @@ public class PessoaJuridica extends Cliente {
                 CNPJnumeros.substring(5, 8),
                 CNPJnumeros.substring(8, 12),
                 CNPJnumeros.substring(12, 14));
+    }
 
+    public void verDados() {
+        System.out.println(this.toString());
     }
 
     @Override
