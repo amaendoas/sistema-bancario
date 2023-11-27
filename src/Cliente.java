@@ -3,6 +3,9 @@ public class Cliente {
     private String email;
     private String telefone;
 
+    public Cliente() {
+    }
+
     public Cliente(String email, String telefone) {
         this.email = email;
         this.telefone = telefone;

@@ -1,7 +1,9 @@
-import java.text.DecimalFormat;
 public class PessoaJuridica extends Cliente {
     private String razaoSocial;
     private String cnpj;
+
+    public PessoaJuridica() {
+    }
 
     public PessoaJuridica(String email, String telefone, String razaoSocial, String cnpj) {
         super(email, telefone);
@@ -18,7 +20,6 @@ public class PessoaJuridica extends Cliente {
     }
 
     public String getCnpj() {
-//                                                      01 234 567 891011 1213
        return formatarCNPJ(cnpj);
     }
 

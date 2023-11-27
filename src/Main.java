@@ -1,178 +1,286 @@
+import org.w3c.dom.ls.LSOutput;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
 public class Main {
 
     static Scanner input = new Scanner(System.in);
-    static ArrayList<Conta> contasBancarias;
+    static ContaCorrente contaCorrente;
+    static ContaPoupanca contaPoupanca;
 
     public static void main(String[] args) {
+        bemvindo();
+    }
 
-         contasBancarias = new ArrayList<Conta>();
-        operacoes();
+    public static void sair() {
+        System.out.println("Flw é nóis!");
+        System.exit(0);
+    }
+
+    public static void bemvindo() {
+        System.out.println("------------------------------------------------------");
+        System.out.println("-------------Bem vindos a nossa Agência---------------");
+        System.out.println("------------------------------------------------------");
+        System.out.println("Deseja criar uma conta? (sim ou nao): ");
+        System.out.print("> ");
+
+        String resposta = input.nextLine();
+
+        if(resposta.equalsIgnoreCase("sim")){
+            criarConta();
+        } else if(resposta.equalsIgnoreCase("nao")) {
+            sair();
+        } else {
+            System.out.println("Digite uma opção válida (sim ou nao)");
+            bemvindo();
+        }
 
     }
 
     public static void operacoes() {
+        System.out.println();
+        System.out.println("-------------------------------------------------------");
+        System.out.println("-------------Bem vindo a área do cliente---------------");
+        System.out.println("-------------------------------------------------------");
+        System.out.println("|                     1 - Depositar                   |");
+        System.out.println("|                     2 - Sacar                       |");
+        System.out.println("|                     3 - Transferir                  |");
+        System.out.println("|                     4 - Ver Saldo                   |");
+        System.out.println("|                     5 - Sair                        |");
+        System.out.println("-------------------------------------------------------");
+        System.out.println("Digite o número da uma operação que deseja realizar: ");
+        System.out.print("> ");
 
-        System.out.println("------------------------------------------------------");
-        System.out.println("-------------Bem vindos a nossa Agência---------------");
-        System.out.println("------------------------------------------------------");
-        System.out.println("***** Selecione uma operação que deseja realizar *****");
-        System.out.println("------------------------------------------------------");
-        System.out.println("|   Opção 1 - Criar conta   |");
-        System.out.println("|   Opção 2 - Depositar     |");
-        System.out.println("|   Opção 3 - Sacar         |");
-        System.out.println("|   Opção 4 - Transferir    |");
-        System.out.println("|   Opção 5 - Listar        |");
-        System.out.println("|   Opção 6 - Sair          |");
-
-        int operacao = input.nextInt();
+        String operacao = input.nextLine();
 
         switch (operacao) {
-            case 1:
-                criarConta();
-                break;
-
-            case 2:
+            case "1":
                 depositar();
                 break;
 
-            case 3:
+            case "2":
                 sacar();
                 break;
 
-            case 4:
+            case "3":
                 transferir();
                 break;
 
-            case 5:
-                listarContas();
+            case "4":
+                verSaldo();
                 break;
 
-            case 6:
-                System.out.println("Flw é nóis!");
-                System.exit(0); // para o sistema
+            case "5":
+                sair();
+                break;
 
             default:
                 System.out.println("Opção inválida!");
+                System.out.println("--------------------------------------------------");
                 operacoes();
                 break;
         }
     }
 
-    public static void criarConta() {
-        //System.out.println("Você está criando uma conta\n");
+    public static void voltar (){
+        System.out.println();
+        System.out.println("------------------------------------------------------");
+        System.out.println("|                   1 - Voltar ao menu               |");
+        System.out.println("|                   2 - Sair                         |");
+        System.out.println("------------------------------------------------------");
 
-        System.out.println("\nNome: ");
-        String nome = input.next();
+        System.out.println("O que deseja fazer agora? (Escolha uma opção): ");
+        System.out.print("> ");
+        int resposta = input.nextInt();
+        input.nextLine();
 
-        System.out.println("\nCPF: ");
-        String cpf = input.next();
-
-        System.out.println("Email: ");
-        String email = input.next();
-
-        Pessoa cliente = new Pessoa(nome, cpf, email);
-
-        Conta conta = new Conta(cliente);
-
-        contasBancarias.add(conta);
-        System.out.println("--- Sua conta foi criada com sucesso! ---");
-
-        operacoes();
+        if(resposta == 1) {
+            operacoes();
+        } else {
+            sair();
+        }
 
     }
 
-    private static Conta encontrarConta(int numeroConta) {
-        Conta conta = null;
-        if(contasBancarias.size() > 0) {
-            for(Conta contaa : contasBancarias) {
-                if(contaa.getNumeroConta() == numeroConta) {
-                    conta = contaa;
-                }
-            }
+    public static void entrar(){
+        System.out.println();
+        System.out.println("------------------------------------------------------");
+        System.out.println("|             1 - Entrar na área do cliente          |");
+        System.out.println("|             2 - Sair                               |");
+        System.out.println("------------------------------------------------------");
+        System.out.println("O que deseja fazer agora? (Escolha uma opção): ");
+        System.out.print("> ");
+
+
+        String resposta = input.nextLine();
+
+        if(resposta.equals("1")) {
+            operacoes();
+        } else if(resposta.equals("2")) {
+            sair();
+        } else {
+            System.out.println("Opção inválida!");
+            entrar();
         }
-        return conta;
+    }
+
+
+    public static void criarConta() {
+        System.out.println("Você deseja abrir uma conta para Pessoa Física (1) ou Pessoa Jurídica (2)?");
+        System.out.print("> ");
+        String tipoCliente = input.nextLine();
+        System.out.println("--------------------------------------------------");
+
+        System.out.println("Deseja abrir uma conta Corrente (1) ou Poupança (2)?");
+        System.out.print("> ");
+
+        String tipoConta = input.nextLine();
+
+        System.out.println("--------------------------------------------------");
+        System.out.println("Para criar sua conta, precisamos de algumas informações.");
+
+        if (tipoCliente.equals("1")) {
+            criarContaPessoaFisica(tipoConta);
+        } else if (tipoCliente.equals("2")) {
+            criarContaPessoaJuridica(tipoConta);
+        } else {
+            System.out.println("Opção inválida!");
+            criarConta();
+        }
+    }
+
+    public static void criarContaPessoaFisica(String tipoConta) {
+        System.out.println("\nNome: ");
+        System.out.print("> ");
+        String nome = input.nextLine();
+
+        System.out.println("\nCPF (apenas números): ");
+        System.out.print("> ");
+        String cpf = input.nextLine();
+
+        System.out.println("\nEmail: ");
+        System.out.print("> ");
+        String email = input.nextLine();
+
+        System.out.println("\nTelefone (apenas números): ");
+        System.out.print("> ");
+        String telefone = input.nextLine();
+
+
+        if (tipoConta.equals("1")) {
+            contaCorrente = new ContaCorrente();
+            contaCorrente.abrirContaPF(nome, cpf, email, telefone);
+            System.out.println("--- Sua conta corrente foi criada com sucesso! ---");
+            System.out.println("--------------------------------------------------");
+            contaCorrente.verConta();
+        } else if (tipoConta.equals("2")) {
+            contaPoupanca = new ContaPoupanca();
+            contaPoupanca.abrirContaPF(nome, cpf, email, telefone);
+            System.out.println("--- Sua conta poupança foi criada com sucesso! ---");
+            System.out.println("--------------------------------------------------");
+            contaPoupanca.verConta();
+        } else {
+            System.out.println("Opção inválida!");
+            System.out.println("--------------------------------------------------");
+        }
+
+        entrar();
+    }
+
+    public static void criarContaPessoaJuridica(String tipoConta) {
+        System.out.println("\nNome da empresa: ");
+        System.out.print("> ");
+        String nomeEmpresa = input.nextLine();
+
+        System.out.println("\nCNPJ (apenas números): ");
+        System.out.print("> ");
+        String cnpj = input.nextLine();
+
+        System.out.println("\nEmail da empresa: ");
+        System.out.print("> ");
+        String emailEmpresa = input.nextLine();
+
+        System.out.println("\nTelefone (apenas números): ");
+        System.out.print("> ");
+        String telefone = input.nextLine();
+
+
+        if (tipoConta.equals("1")) {
+            contaCorrente = new ContaCorrente();
+            contaCorrente.abrirContaPJ(nomeEmpresa, cnpj, emailEmpresa, telefone);
+            System.out.println("--- Sua conta corrente foi criada com sucesso! ---");
+            System.out.println("--------------------------------------------------");
+            contaCorrente.verConta();
+        } else if (tipoConta.equals("2")) {
+            contaPoupanca = new ContaPoupanca();
+            contaPoupanca.abrirContaPJ(nomeEmpresa, cnpj, emailEmpresa, telefone );
+            System.out.println("--- Sua conta poupança foi criada com sucesso! ---");
+            System.out.println("--------------------------------------------------");
+            contaPoupanca.verConta();
+        } else {
+            System.out.println("Opção inválida!");
+            System.out.println("--------------------------------------------------");
+        }
+
+        entrar();
     }
 
     public static void depositar() {
-        System.out.println("Número da conta: ");
-        int numeroConta = input.nextInt();
-        Conta conta = encontrarConta(numeroConta);
+        System.out.println("\nDigite o valor a ser depositado: ");
+        System.out.print("> ");
+        double valorDeposito = input.nextDouble();
 
-        if(conta != null) {
-            System.out.println("Qual valor deseja depositar? ");
-            Double valorDeposito = input.nextDouble();
-
-            conta.depositar(valorDeposito);
-        }else {
-            System.out.println("--- Conta não encontrada ---");
+        if (contaPoupanca != null) {
+            contaPoupanca.depositar(valorDeposito);
+        }else if (contaCorrente != null) {
+            contaCorrente.depositar(valorDeposito);
         }
 
-        operacoes();
-
+        voltar();
     }
 
     public static void sacar() {
-        System.out.println("Número da conta: ");
-        int numeroConta = input.nextInt();
+        System.out.println("\nDigite o valor a ser sacado: ");
+        System.out.print("> ");
+        double valorSaque = input.nextDouble();
 
-        Conta conta = encontrarConta(numeroConta);
-
-        if(conta != null) {
-            System.out.println("Qual valor deseja sacar? ");
-            Double valorSaque = input.nextDouble();
-
-            conta.sacar(valorSaque);
-            System.out.println("--- Saque realizado com sucesso! ---");
-        }else {
-            System.out.println("--- Conta não encontrada ---");
+        if (contaPoupanca != null) {
+            contaPoupanca.sacar(valorSaque);
+        }else if (contaCorrente != null) {
+            contaCorrente.sacar(valorSaque);
         }
 
-        operacoes();
-
+        voltar();
     }
 
     public static void transferir() {
-        System.out.println("Número da conta que vai enviar a transferência: ");
-        int numeroContaRemetente = input.nextInt();
+        System.out.println("\nDigite o número da conta destinatária: ");
+        System.out.print("> ");
+        String numeroContaDestinatario = input.nextLine();
 
-        Conta contaRemetente = encontrarConta(numeroContaRemetente);
+        System.out.println("\nDigite o valor a ser transferido: ");
+        System.out.print("> ");
+        double valorTransferencia = input.nextDouble();
 
-        if(contaRemetente != null) {
-            System.out.println("Número da conta do destinatário: ");
-            int numeroContaDestinatario = input.nextInt();
-
-            Conta contaDestinatario = encontrarConta(numeroContaDestinatario);
-
-            if(contaDestinatario != null) {
-                System.out.println("Valor da transferência: ");
-                Double valor = input.nextDouble();
-
-                contaRemetente.transferencia(contaDestinatario, valor);
-
-            }else {
-                System.out.println("--- A conta para depósito não foi encontrada ---");
-            }
-
-        }else {
-            System.out.println("--- Conta para transferência não encontrada ---");
-        }
-        operacoes();
-    }
-
-    public static void listarContas() {
-        if(contasBancarias.size() > 0) {
-            for(Conta conta: contasBancarias) {
-                System.out.println(conta);
-            }
-        }else {
-            System.out.println("--- Não há contas cadastradas ---");
+        if (contaPoupanca != null) {
+            contaPoupanca.transferir(numeroContaDestinatario, valorTransferencia);
+        }else if (contaCorrente != null) {
+            contaCorrente.transferir(numeroContaDestinatario, valorTransferencia);
         }
 
-        operacoes();
+        voltar();
     }
+
+    public static void verSaldo() {
+
+        if (contaPoupanca != null) {
+            contaPoupanca.verSaldo();
+        }else if (contaCorrente != null) {
+            contaCorrente.verSaldo();
+        }
+
+        voltar();
+    }
+
 }
