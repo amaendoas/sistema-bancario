@@ -17,7 +17,7 @@ public class Main {
 
     public static void bemvindo() {
         System.out.println("------------------------------------------------------");
-        System.out.println("-------------Bem vindos a nossa Agência---------------");
+        System.out.println("----------------Bem vindo ao MyBank-------------------");
         System.out.println("------------------------------------------------------");
         System.out.println("Deseja criar uma conta? (sim ou nao): ");
         System.out.print("> ");
@@ -135,16 +135,13 @@ public class Main {
         System.out.println("Você deseja abrir uma conta para Pessoa Física (1) ou Pessoa Jurídica (2)?");
         System.out.print("> ");
         String tipoCliente = input.nextLine();
-        System.out.println("--------------------------------------------------");
 
         System.out.println("Deseja abrir uma conta Corrente (1) ou Poupança (2)?");
         System.out.print("> ");
 
         String tipoConta = input.nextLine();
 
-        System.out.println("--------------------------------------------------");
         System.out.println("Para criar sua conta, precisamos de algumas informações:");
-        System.out.println("--------------------------------------------------");
 
         if (tipoCliente.equals("1")) {
             criarContaPessoaFisica(tipoConta);
@@ -165,14 +162,26 @@ public class Main {
         System.out.print("> ");
         String cpf = input.nextLine();
 
+        while(cpf.length() != 11) {
+            System.out.println("Digite um cpf válido");
+            System.out.print("> ");
+            cpf = input.nextLine();
+        }
+
         System.out.println("Email: ");
         System.out.print("> ");
 
         String email = input.nextLine();
 
-        System.out.println("Telefone (apenas números): ");
+        System.out.println("Telefone (com DDD, apenas números ex: 83912345678): ");
         System.out.print("> ");
         String telefone = input.nextLine();
+
+        while(telefone.length() != 11) {
+            System.out.println("Digite um número de telefone válido");
+            System.out.print("> ");
+            telefone = input.nextLine();
+        }
 
         if (tipoConta.equals("1")) {
             contaCorrente = new ContaCorrente();
@@ -195,21 +204,33 @@ public class Main {
     }
 
     public static void criarContaPessoaJuridica(String tipoConta) {
-        System.out.println("\nNome da empresa: ");
+        System.out.println("Nome da empresa: ");
         System.out.print("> ");
         String nomeEmpresa = input.nextLine();
 
-        System.out.println("\nCNPJ (apenas números): ");
+        System.out.println("CNPJ (apenas números): ");
         System.out.print("> ");
         String cnpj = input.nextLine();
 
-        System.out.println("\nEmail da empresa: ");
+        while(cnpj.length() != 14) {
+            System.out.println("Digite um número um cnpj válido");
+            System.out.print("> ");
+            cnpj = input.nextLine();
+        }
+
+        System.out.println("Email da empresa: ");
         System.out.print("> ");
         String emailEmpresa = input.nextLine();
 
-        System.out.println("\nTelefone (apenas números): ");
+        System.out.println("Telefone (apenas números): ");
         System.out.print("> ");
         String telefone = input.nextLine();
+
+        while(telefone.length() != 11) {
+            System.out.println("Digite um número de telefone válido");
+            System.out.print("> ");
+            telefone = input.nextLine();
+        }
 
 
         if (tipoConta.equals("1")) {
