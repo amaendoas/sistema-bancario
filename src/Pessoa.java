@@ -19,7 +19,6 @@ public class Pessoa {
 
     public String getTelefone() {
        return formatarTelefone(telefone);
-
     }
 
     public void setTelefone(String telefone) {

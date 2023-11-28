@@ -49,14 +49,13 @@ public class ContaBancaria {
         }
     }
 
-    public boolean sacar(double valor){
+    public void sacar(double valor){
         if(this.saldo < valor) {
             System.out.println("Saldo insuficiente");
         } else {
             this.saldo -= valor;
             System.out.printf("\nSucesso! Seu saldo: R$%.2f\n", getSaldo());
         }
-        return false;
     }
     public void depositar(double valor){
         this.saldo += valor;
